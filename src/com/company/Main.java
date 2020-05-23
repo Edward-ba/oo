@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Main
 {
+    // Main entry point
     public static void main(String[] args)
     {
         Battlefield battlefield = new Battlefield();

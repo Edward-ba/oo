@@ -5,6 +5,7 @@ import java.lang.*;
 public class Battlefield
 {
     // Test arjuna change
+    // another comment
 
 
     int sizeOfPlayerFleet = 0;
@@ -35,6 +36,7 @@ public class Battlefield
         }
     }
 
+    // function place a ship
     boolean placeAShip(int x, int y, int len, int dir)
     {
         if (len > maxShipLen || len < minShipLen || dir > 2 || dir < 1 || x >= width || x < 0 || y >= height || y < 0)

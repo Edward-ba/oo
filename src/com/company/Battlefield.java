@@ -4,10 +4,6 @@ import java.lang.*;
 
 public class Battlefield
 {
-    // Test arjuna change
-    // another comment
-
-
     int sizeOfPlayerFleet = 0;
     int sizeOfCompFleet = 0;
     Scanner scanner = new Scanner(System.in);
@@ -18,6 +14,7 @@ public class Battlefield
     int minShipLen = 1;
     int width = 10;
     int height = 10;
+
     char[][] field0 = new char[width][height];
     char[][] field1 = new char[width][height];
 

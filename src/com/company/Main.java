@@ -7,9 +7,8 @@ public class Main
     // Main entry point
     public static void main(String[] args)
     {
-        BattleGrid bg = new BattleGrid(10, 10);
-        bg.printBoard();
-
+        Game game = new Game();
+        game.PlayAOnePlayerGame();
 /*
         Battlefield battlefield = new Battlefield();
         battlefield.clear_boards();

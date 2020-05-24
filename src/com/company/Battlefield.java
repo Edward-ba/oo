@@ -15,8 +15,8 @@ public class Battlefield
     int width = 10;
     int height = 10;
 
-    char[][] field0 = new char[width][height];
-    char[][] field1 = new char[width][height];
+    char[][] field0 = new char[height][width];
+    char[][] field1 = new char[height][width];
 
     private String tryMessage = "Try Again";
 
@@ -36,23 +36,23 @@ public class Battlefield
     // function place a ship
     boolean placeAShip(int x, int y, int len, int dir)
     {
-        if (len > maxShipLen || len < minShipLen || dir > 2 || dir < 1 || x >= width || x < 0 || y >= height || y < 0)
+        if (len > maxShipLen || len < minShipLen || dir > 2 || dir < 1 || x >= width -len || x < 0 || y >= height - len || y < 0)
         {
             System.out.println(tryMessage);
             return false;
         }
         for (int i = 0; i < len; ++i)
         {
-            if (field0[x][y] != '@' && field1[x][y] != '@')
+            if (field0[y][x] != '@' && field1[y][x] != '@')
             {
                 System.out.println(tryMessage);
                 return false;
             }
-            field0[x][y] = '@';
+            field0[y][x] = '@';
             if (dir == 1)
-                ++y;
-            else if (dir == 2)
                 ++x;
+            else if (dir == 2)
+                ++y;
         }
         sizeOfPlayerFleet += len;
         return true;
@@ -64,8 +64,8 @@ public class Battlefield
         {
             for (int y = 0; y < height; ++y)
             {
-                field0[x][y] = ' ';
-                field1[x][y] = ' ';
+                field0[y][x] = ' ';
+                field1[y][x] = ' ';
             }
         }
     }
@@ -76,7 +76,7 @@ public class Battlefield
         {
             for (int y = 0; y < height; ++y)
             {
-                System.out.print(field0[x][y]);
+                System.out.print(field0[y][x]);
             }
             System.out.println();
         }
@@ -92,12 +92,12 @@ public class Battlefield
         int y = random.nextInt(height);
         for (int i = 0; i < len; ++i)
         {
-            if (field0[x][y] != '@' && field1[x][y] != '@')
+            if (field0[y][x] != '@' && field1[y][x] != '@')
             {
                 System.out.println(tryMessage);
                 return false;
             }
-            field1[x][y] = '@';
+            field1[y][x] = '@';
 
             if (dir == 1)
                 ++y;
@@ -118,25 +118,25 @@ public class Battlefield
         {
             int x = readInt("X: ");
             int y = readInt("Y: ");
-            if (x > width - 1 || x < 0 || y > height - 1 || y < 0 || field0[x][y] == '-' || field1[x][y] == 'X' || field0[x][y] == '!')
+            if (x > width - 1 || x < 0 || y > height - 1 || y < 0 || field0[y][x] == '-' || field1[x][y] == 'X' || field0[x][y] == '!')
             {
                 System.out.println(tryMessage);
                 --i;
             }
-            else if (field0[x][y] == ' ')
+            else if (field0[y][x] == ' ')
             {
                 System.out.println("sorry you didn't hit anything except water this will be marked with a -");
-                field0[x][y] = '-';
+                field0[y][x] = '-';
             }
-            else if (field0[x][y] == '@')
+            else if (field0[y][x] == '@')
             {
                 System.out.println("whoops you hit your own ship this will be marked as a !");
-                field0[x][y] = '!';
+                field0[y][x] = '!';
             }
-            else if (field1[x][y] == '@')
+            else if (field1[y][x] == '@')
             {
                 System.out.println("good job you hit one of the computers ships. this will be marked with a X");
-                field0[x][y] = 'X';
+                field0[y][x] = 'X';
                 System.out.println("and you get to go again");
                 --i;
             }
@@ -181,11 +181,11 @@ public class Battlefield
         {
             for (int y = 0; y < height; ++y)
             {
-                if (field0[x][y] == '!')
+                if (field0[y][x] == '!')
                 {
                     ++playerShipsDead;
                 }
-                else if (field0[x][y] == 'X')
+                else if (field0[y][x] == 'X')
                 {
                     ++compShipsDead;
                 }

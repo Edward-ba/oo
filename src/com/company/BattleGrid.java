@@ -8,8 +8,8 @@ public class BattleGrid {
     int sizeOfFleet = 0;
     int maxShipLen = 4;
     int minShipLen = 1;
-    private int width = 0;
-    private int height = 0;
+    int width = 10;
+    int height = 10;
     char[][] field;
 
     int readInt(String message) {
@@ -24,10 +24,8 @@ public class BattleGrid {
             return -1;
         }
     }
-    public BattleGrid(int w, int h)
+    public BattleGrid(int width, int height)
     {
-        width = w;
-        height = h;
         field = new char[height][width];
         clearBoard();
     }
@@ -45,7 +43,7 @@ public class BattleGrid {
 
     public void printBoard()
     {
-        System.out.println("PrintBoard");
+        System.out.println("Your Board");
         System.out.print("  ");
         for (int i = 0; i < width; ++i)
         {
@@ -70,16 +68,58 @@ public class BattleGrid {
         System.out.println();
     }
 
+    public void enemyPrint()
+    {
+        System.out.println("Enemy Board");
+        System.out.print("  ");
+        for (int i = 0; i < width; ++i)
+        {
+            System.out.print(i);
+        }
+        System.out.println();
+        for (int x = 0; x < height; ++x)
+        {
+            System.out.print(x + "|");
+            for (int y = 0; y < width; ++y)
+            {
+                if (field[y][x] == '@') {
+                    System.out.print(field[y][x]);
+                }
+                else
+                {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print("|" + x);
+            System.out.println();
+        }
+        System.out.print("  ");
+        for (int i = 0; i < width; ++i)
+        {
+            System.out.print(i);
+        }
+        System.out.println();
+    }
+
     boolean placeAShip(int x, int y, int len, int dir)
     {
-        if (len > maxShipLen || len < minShipLen || dir > 2 || dir < 1 || x >= width - len || x < 0 || y >= height - len || y < 0)
+        if (len > maxShipLen ||
+                len < minShipLen ||
+                dir > 2 ||
+                dir < 1 ||
+                x >= width ||
+                x < 0 ||
+                y >= height ||
+                y < 0)
         {
             System.out.println(tryMessage);
             return false;
         }
         for (int i = 0; i < len; ++i)
         {
-            if (field[y][x] != '@')
+            if (field[y][x] == '@' ||
+                    x >= width ||
+                    y >= height)
             {
                 System.out.println(tryMessage);
                 return false;
@@ -94,7 +134,7 @@ public class BattleGrid {
         return true;
     }
 
-    boolean checkForWinner()
+    boolean checkIfLost()
     {
         int playerShipsDead = 0;
         for (int x = 0; x < width; ++x)

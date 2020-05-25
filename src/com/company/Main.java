@@ -8,7 +8,7 @@ public class Main
     public static void main(String[] args)
     {
         Game game = new Game();
-        game.PlayAOnePlayerGame();
+        game.playAOnePlayerGame();
 /*
         Battlefield battlefield = new Battlefield();
         battlefield.clear_boards();

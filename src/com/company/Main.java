@@ -1,14 +1,20 @@
 package com.company;
+import javax.swing.text.Style;
 import java.lang.*;
 import java.util.*;
 
 public class Main
 {
     // Main entry point
+
+
     public static void main(String[] args)
     {
         Game game = new Game();
-        game.playAOnePlayerGame();
+        Game.ShipCoordinates sc = game.getShipCoordinates();
+        System.out.println(sc.toString());
+
+//        game.playAOnePlayerGame();
 /*
         Battlefield battlefield = new Battlefield();
         battlefield.clear_boards();

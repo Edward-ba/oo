@@ -3,6 +3,30 @@ import java.lang.*;
 import java.util.*;
 
 public class Game {
+
+    public class ShipCoordinates
+    {
+        int x;
+        int y;
+        int len;
+        char dir;
+
+        public String toString()
+        {
+            StringBuffer sb = new StringBuffer();
+            sb.append("X(");
+            sb.append(x);
+            sb.append(") Y(");
+            sb.append(y);
+            sb.append(") Len(");
+            sb.append(len);
+            sb.append(") Dir(");
+            sb.append(dir);
+            sb.append(")");
+            return sb.toString();
+        }
+    };
+
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
     int gridWidth = 10;
@@ -11,6 +35,29 @@ public class Game {
     int numOfShips = 5;
     BattleGrid field0 = new BattleGrid(gridWidth, gridHeight);
     BattleGrid field1 = new BattleGrid(gridWidth, gridHeight);
+
+    ShipCoordinates getShipCoordinates()
+    {
+        System.out.println("Enter your ship coordinates as X,Y,Len,Dir. Eg \"3, 5, 2, N\"");
+        Scanner scanner = new Scanner(System.in);
+        String tokens[] = scanner.nextLine().split(",");
+        if (tokens.length != 4)
+            System.out.println("Please try again, incorrect number of inputs: Enter as  X,Y,Len,Dir. Eg \"3, 5, 2, N\"");
+
+        for(var t : tokens)
+            System.out.println(t.trim());
+
+        ShipCoordinates sc = new ShipCoordinates();
+
+        sc.x = Integer.parseInt(tokens[0].trim());
+        sc.y = Integer.parseInt(tokens[1].trim());
+        sc.len = Integer.parseInt(tokens[2].trim());
+        sc.dir = tokens[3].trim().charAt(0);
+
+        return sc;
+    }
+
+
 
     int readInt(String message) {
         int ret;
@@ -22,6 +69,9 @@ public class Game {
             return -1;
         }
     }
+
+
+
 
     public void playAOnePlayerGame()
     {

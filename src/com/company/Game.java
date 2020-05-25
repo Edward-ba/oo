@@ -37,7 +37,7 @@ public class Game {
             }
         }
 
-        field0.printBoard();
+        field0.printBoard(true);
 
         for (int i = 0; i < numOfShips; ++i)
         {
@@ -55,7 +55,7 @@ public class Game {
             }
         }
 
-        field1.enemyPrint();
+        field1.printBoard(false);
 
         System.out.println("-------------------------------------------");
         while (true)
@@ -90,7 +90,7 @@ public class Game {
                 }
             }
 
-            field1.enemyPrint();
+            field1.printBoard(false);
 
             if (field1.checkIfLost())
             {
@@ -121,7 +121,7 @@ public class Game {
                 }
             }
 
-            field0.printBoard();
+            field0.printBoard(true);
 
             if (field0.checkIfLost())
             {

@@ -41,9 +41,15 @@ public class BattleGrid {
         }
     }
 
-    public void printBoard()
+    public void printBoard(boolean showShip)
     {
-        System.out.println("Your Board");
+        if (showShip) {
+            System.out.println("Your Board");
+        }
+        else
+        {
+            System.out.println("Enemy Board");
+        }
         System.out.print("  ");
         for (int i = 0; i < width; ++i)
         {
@@ -55,34 +61,8 @@ public class BattleGrid {
             System.out.print(x + "|");
             for (int y = 0; y < width; ++y)
             {
-                System.out.print(field[y][x]);
-            }
-            System.out.print("|" + x);
-            System.out.println();
-        }
-        System.out.print("  ");
-        for (int i = 0; i < width; ++i)
-        {
-            System.out.print(i);
-        }
-        System.out.println();
-    }
-
-    public void enemyPrint()
-    {
-        System.out.println("Enemy Board");
-        System.out.print("  ");
-        for (int i = 0; i < width; ++i)
-        {
-            System.out.print(i);
-        }
-        System.out.println();
-        for (int x = 0; x < height; ++x)
-        {
-            System.out.print(x + "|");
-            for (int y = 0; y < width; ++y)
-            {
-                if (field[y][x] == '@') {
+                if (!showShip &&
+                        field[y][x] != '@') {
                     System.out.print(field[y][x]);
                 }
                 else

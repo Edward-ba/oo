@@ -12,18 +12,6 @@ public class BattleGrid {
     int height = 10;
     char[][] field;
 
-    int readInt(String message) {
-        int ret;
-        System.out.print(message);
-        Scanner scanner = new Scanner(System.in);
-
-        try {
-            ret = scanner.nextInt();
-            return ret;
-        } catch (InputMismatchException e) {
-            return -1;
-        }
-    }
     public BattleGrid(int width, int height)
     {
         field = new char[height][width];

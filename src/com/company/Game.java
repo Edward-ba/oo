@@ -36,28 +36,37 @@ public class Game {
     BattleGrid field0 = new BattleGrid(gridWidth, gridHeight);
     BattleGrid field1 = new BattleGrid(gridWidth, gridHeight);
 
-    ShipCoordinates getShipCoordinates()
+    ShipCoordinates readShipCoordinates()
     {
+
         System.out.println("Enter your ship coordinates as X,Y,Len,Dir. Eg \"3, 5, 2, N\"");
         Scanner scanner = new Scanner(System.in);
         String tokens[] = scanner.nextLine().split(",");
-        if (tokens.length != 4)
+        if (tokens.length != 4) {
             System.out.println("Please try again, incorrect number of inputs: Enter as  X,Y,Len,Dir. Eg \"3, 5, 2, N\"");
+        }
 
-        for(var t : tokens)
+        for(var t : tokens) {
             System.out.println(t.trim());
+        }
 
         ShipCoordinates sc = new ShipCoordinates();
-
-        sc.x = Integer.parseInt(tokens[0].trim());
-        sc.y = Integer.parseInt(tokens[1].trim());
-        sc.len = Integer.parseInt(tokens[2].trim());
-        sc.dir = tokens[3].trim().charAt(0);
-
+        try {
+            sc.x = Integer.parseInt(tokens[0].trim());
+            sc.y = Integer.parseInt(tokens[1].trim());
+            sc.len = Integer.parseInt(tokens[2].trim());
+            sc.dir = tokens[3].trim().charAt(0);
+            sc.dir = Character.toUpperCase(sc.dir);
+        }
+        catch (Exception e)
+        {
+            sc.x = - 1;
+            sc.y = - 1;
+            sc.len = -1;
+            sc.dir = 'z';
+        }
         return sc;
     }
-
-
 
     int readInt(String message) {
         int ret;
@@ -70,18 +79,12 @@ public class Game {
         }
     }
 
-
-
-
     public void playAOnePlayerGame()
     {
         for (int i = 0; i < numOfShips; ++i)
         {
-            int x = readInt("X: ");
-            int y = readInt("Y: ");
-            int len = readInt("Length of your ship: ");
-            int dir = readInt("for the direction of your ship, 1 is north and 2 is east: ");
-            if (!field0.placeAShip(x, y, len, dir))
+            ShipCoordinates sc = readShipCoordinates();
+            if (!field0.placeAShip(sc.x, sc.y, sc.len, sc.dir))
             {
                 --i;
             }

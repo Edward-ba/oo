@@ -73,8 +73,8 @@ public class BattleGrid {
     {
         if (len > maxShipLen ||
                 len < minShipLen ||
-                dir > 2 ||
-                dir < 1 ||
+                (dir != 1 &&
+                dir != 2) ||
                 x >= width ||
                 x < 0 ||
                 y >= height ||

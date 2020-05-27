@@ -3,13 +3,12 @@ import java.lang.*;
 import java.util.*;
 
 public class Game {
-
     public class ShipCoordinates
     {
         int x;
         int y;
         int len;
-        char dir;
+        int dir;
 
         public String toString()
         {
@@ -25,7 +24,7 @@ public class Game {
             sb.append(")");
             return sb.toString();
         }
-    };
+    }
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -39,15 +38,11 @@ public class Game {
     ShipCoordinates readShipCoordinates()
     {
 
-        System.out.println("Enter your ship coordinates as X,Y,Len,Dir. Eg \"3, 5, 2, N\"");
+        System.out.println("Enter your ship coordinates as X,Y,Len,Dir for placing your ship. Eg \"3, 5, 2, N\"");
         Scanner scanner = new Scanner(System.in);
         String tokens[] = scanner.nextLine().split(",");
         if (tokens.length != 4) {
             System.out.println("Please try again, incorrect number of inputs: Enter as  X,Y,Len,Dir. Eg \"3, 5, 2, N\"");
-        }
-
-        for(var t : tokens) {
-            System.out.println(t.trim());
         }
 
         ShipCoordinates sc = new ShipCoordinates();
@@ -55,15 +50,24 @@ public class Game {
             sc.x = Integer.parseInt(tokens[0].trim());
             sc.y = Integer.parseInt(tokens[1].trim());
             sc.len = Integer.parseInt(tokens[2].trim());
-            sc.dir = tokens[3].trim().charAt(0);
-            sc.dir = Character.toUpperCase(sc.dir);
+            char dir = tokens[3].trim().charAt(0);
+            dir = Character.toUpperCase(dir);
+            if (dir == 'N')
+            {
+                sc.dir = 1;
+            }
+            else if (dir == 'E')
+            {
+                sc.dir = 2;
+            }
+
         }
         catch (Exception e)
         {
             sc.x = - 1;
             sc.y = - 1;
             sc.len = -1;
-            sc.dir = 'z';
+            sc.dir = 0;
         }
         return sc;
     }
@@ -81,6 +85,14 @@ public class Game {
 
     public void playAOnePlayerGame()
     {
+        System.out.println("This is a one player battle ships game.");
+        System.out.println("You against the computer.");
+        System.out.println("you and the computer each get " + numOfShips + " ships.");
+        System.out.println("your maximum ship length is " + maxShipLen + ".");
+        System.out.println("your grid/board is " + gridWidth + " by " + gridHeight + ".");
+        System.out.println("now it is time for you to place your ships");
+        System.out.println("when placing your ships N is north and E is east there are no other directions than those two.");
+        System.out.println("don't make your ships length greater than " + maxShipLen + ".");
         for (int i = 0; i < numOfShips; ++i)
         {
             ShipCoordinates sc = readShipCoordinates();
@@ -111,6 +123,8 @@ public class Game {
         field1.printBoard(false);
 
         System.out.println("-------------------------------------------");
+        System.out.println("now it is time to shoot at The computer's ships.");
+        System.out.println("when shooting make sure not to shoot at places you have already shot at.");
         while (true)
         {
             for (int i = 0; i < 1; ++i)
